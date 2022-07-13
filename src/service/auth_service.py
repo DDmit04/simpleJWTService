@@ -1,5 +1,7 @@
 import uuid
 
+from werkzeug.security import check_password_hash
+
 from exception.username_password_exception import UsernamePasswordException
 from model.token_auth_data import TokenAuthData
 from repo.user_repository import UserRepository
@@ -15,12 +17,16 @@ class AuthService:
         self.jwt_service = jwt_service
         self.user_repository = user_repository
 
-    def auth_user(self, username, given_password) -> TokenAuthData:
+    def auth_user(self, username, password):
         user = self.user_repository.find_by_username(username)
-        user_password = user.password
-        if given_password == user_password:
-            return self.__gen_tokens_for_user(user)
-        raise UsernamePasswordException()
+        if user is not None and check_password_hash(user.password,
+                                                    password):
+            return username
+        raise UsernamePasswordException
+
+    def get_tokens(self, username) -> TokenAuthData:
+        user = self.user_repository.find_by_username(username)
+        return self.__gen_tokens_for_user(user)
 
     def logout(self, user_id):
         user = self.user_repository.get_user_by_id(user_id)

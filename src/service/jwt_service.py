@@ -1,7 +1,7 @@
 import datetime
 
 from flask_jwt_extended import create_access_token, create_refresh_token, \
-    get_jwt_identity, decode_token
+    decode_token
 
 
 class JwtService:

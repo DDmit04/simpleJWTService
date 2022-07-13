@@ -4,6 +4,7 @@ from datetime import timedelta
 
 import humanfriendly
 from flask import Flask
+from werkzeug.security import generate_password_hash
 
 from model.user import User
 from repo.user_repository import UserRepository
@@ -42,7 +43,7 @@ class DependencyInjector:
             config = self.get_config()
             user_id = config['USER_ID']
             username = config['USERNAME']
-            password = config['PASSWORD']
+            password = generate_password_hash(config['PASSWORD'])
             user_uuid = uuid.uuid4().hex
             user = User(user_id, username, password, user_uuid)
             self.user_bunk = [user]
