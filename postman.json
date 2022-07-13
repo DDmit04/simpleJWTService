@@ -12,6 +12,21 @@
 				"disabledSystemHeaders": {}
 			},
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pswd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -21,15 +36,6 @@
 						"disabled": true
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"pswd\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{HOST}}/auth/login",
 					"host": [
@@ -144,6 +150,11 @@
 		{
 			"key": "TOKEN",
 			"value": "none",
+			"type": "string"
+		},
+		{
+			"key": "HOST",
+			"value": "http://localhost:80",
 			"type": "string"
 		}
 	]
