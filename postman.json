@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "8c149b35-ab71-4da8-bd7b-ae83188fd506",
+		"name": "JWT service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10336020"
+	},
+	"item": [
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "file-serv.ru",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"pswd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "file-serv.ru",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/auth/logout",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "file-serv.ru",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/auth/ref",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"ref"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": "none",
+			"type": "string"
+		}
+	]
+}

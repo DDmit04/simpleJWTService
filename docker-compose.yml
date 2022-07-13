@@ -1,0 +1,27 @@
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 80:80
+
+  app:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    environment:
+      BASE_USER_ID: ${BASE_USER_ID}
+      BASE_USER_NAME: ${BASE_USER_NAME}
+      BASE_USER_PASSWORD: ${BASE_USER_PASSWORD}
+      JWT_LIFETIME: ${JWT_LIFETIME}
+      REFRESH_LIFETIME: ${REFRESH_LIFETIME}
+      JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - ./src:/app/src
+    command: gunicorn --bind 0.0.0.0:5000 --pythonpath src main:app
+
+networks:
+  default:
+    name: test
