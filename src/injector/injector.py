@@ -38,7 +38,7 @@ class DependencyInjector:
             "JWT_SECRET": jwt_Secret
         }
 
-    def get_user_bunk(self):
+    def get_user_bank(self):
         if self.user_bunk is None:
             config = self.get_config()
             user_id = config['USER_ID']
@@ -50,8 +50,8 @@ class DependencyInjector:
         return self.user_bunk
 
     def get_user_repo(self):
-        user_bunk = self.get_user_bunk()
-        return UserRepository(user_bunk)
+        user_bank = self.get_user_bank()
+        return UserRepository(user_bank)
 
     def get_jwt_service(self) -> JwtService:
         config = self.get_config()
